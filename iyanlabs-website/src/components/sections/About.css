@@ -1,0 +1,28 @@
+.about__top { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s-2xl); align-items: start; }
+.about__top .section-head { position: sticky; top: calc(var(--header-h) + 32px); }
+.about__values { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+.about__value { display: grid; gap: 10px; align-content: start; padding: var(--s-lg); border-radius: var(--r-lg); background: var(--c-white); border: 1px solid var(--c-border); position: relative; overflow: hidden; transition: border-color var(--dur-2); }
+.about__value:hover { border-color: var(--c-primary-fixed); }
+.about__value::after { content: ''; position: absolute; right: -40px; top: -40px; width: 110px; height: 110px; border-radius: 50%; border: 1px dashed var(--c-primary-fixed); }
+.about__value p { color: var(--c-text-2); font-size: 14px; line-height: 22px; }
+.about__icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--r); background: var(--c-surface-soft); color: var(--c-primary-deep); border: 1px solid var(--c-primary-fixed); }
+.about__value:nth-child(4) .about__icon { background: #fff7ed; color: var(--c-secondary-text); border-color: #ffedd5; }
+
+.leaders { margin-top: var(--s-2xl); padding-top: var(--s-xl); border-top: 1px solid var(--c-border); }
+.leaders__title { color: var(--c-text-3); margin-bottom: var(--s-md); }
+.leaders__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+.leader { --tone: var(--c-primary); display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: var(--r); border: 1px solid var(--c-border); background: var(--c-white); }
+.leader--mulesoft { --tone: var(--c-tertiary-text); }
+.leader--mobile { --tone: var(--c-secondary); }
+.leader__mark { flex: none; width: 48px; height: 48px; display: grid; place-items: center; border-radius: var(--r); font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--tone); background: var(--c-surface); border: 1.5px solid var(--tone); background-image: linear-gradient(color-mix(in srgb, var(--tone) 12%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--tone) 12%, transparent) 1px, transparent 1px); background-size: 8px 8px; }
+.leader__name { font-family: var(--font-display); font-weight: 600; font-size: 16px; }
+.leader__role { font-size: 13px; line-height: 19px; color: var(--c-text-2); }
+
+@media (max-width: 1024px) {
+  .about__top { grid-template-columns: 1fr; }
+  .about__top .section-head { position: static; }
+  .leaders__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 639px) {
+  .about__values { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,38 @@
+.process .section-head { margin-bottom: var(--s-2xl); }
+
+.timeline { --progress: 0; position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+.timeline__track { position: absolute; left: 22px; right: calc(25% - 22px); top: 22px; height: 2px; background: var(--c-border); border-radius: 2px; }
+.timeline__fill { position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-primary), var(--c-tertiary)); transform-origin: left; transform: scaleX(var(--progress)); border-radius: 2px; }
+
+.timeline__step {
+  /* lit = 1 once progress has reached this step */
+  --lit: clamp(0, calc((var(--progress) - var(--at)) * 40 + 1), 1);
+  position: relative; display: grid; gap: 20px; grid-template-rows: auto 1fr;
+}
+.timeline__marker {
+  position: relative; z-index: 1; width: 46px; height: 46px; display: grid; place-items: center; border-radius: var(--r);
+  font-family: var(--font-display); font-weight: 700; font-size: 14px;
+  background: var(--c-white); border: 1.5px solid var(--c-border-strong); color: var(--c-text-3);
+  transition: background-color var(--dur-2), color var(--dur-2), border-color var(--dur-2), box-shadow var(--dur-2);
+}
+.timeline__body { display: grid; gap: 8px; padding: 20px; border-radius: var(--r); background: var(--c-white); border: 1px solid var(--c-border); transition: border-color var(--dur-2), box-shadow var(--dur-2); height: 100%; }
+.timeline__body p { font-size: 14px; line-height: 22px; color: var(--c-text-2); }
+.timeline__deliverable { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--c-divider); display: grid; gap: 4px; color: var(--c-text) !important; font-weight: 500; }
+.timeline__deliverable .t-label { color: var(--c-secondary-text); font-size: 11px; }
+
+/* Lit state is computed in CSS from scroll progress, so it reverses on scroll-up. */
+@supports (width: calc(1px * clamp(0, 1, 1))) {
+  .timeline__marker { background: color-mix(in srgb, var(--c-primary) calc(var(--lit) * 100%), var(--c-white)); color: color-mix(in srgb, #fff calc(var(--lit) * 100%), var(--c-text-3)); border-color: color-mix(in srgb, var(--c-primary) calc(var(--lit) * 100%), var(--c-border-strong)); }
+  .timeline__body { border-color: color-mix(in srgb, var(--c-primary-fixed) calc(var(--lit) * 100%), var(--c-border)); }
+}
+.timeline__step:last-child .timeline__marker { background: color-mix(in srgb, var(--c-secondary) calc(var(--lit) * 100%), var(--c-white)); border-color: color-mix(in srgb, var(--c-secondary) calc(var(--lit) * 100%), var(--c-border-strong)); }
+
+@media (max-width: 1024px) {
+  .timeline { grid-template-columns: 1fr; gap: var(--s-lg); }
+  .timeline__track { left: 22px; right: auto; top: 22px; bottom: 22px; width: 2px; height: auto; }
+  .timeline__fill { transform-origin: top; transform: scaleY(var(--progress)); background: linear-gradient(180deg, var(--c-primary), var(--c-tertiary)); }
+  .timeline__step { grid-template-columns: 46px 1fr; gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline { --progress: 1 !important; }
+}

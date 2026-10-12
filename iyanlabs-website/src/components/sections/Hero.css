@@ -1,0 +1,47 @@
+.hero { position: relative; padding-top: calc(var(--header-h) + 56px); padding-bottom: var(--s-2xl); overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; z-index: -1; mask-image: linear-gradient(180deg, #000 0%, transparent 85%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%); }
+.hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s-2xl); align-items: center; }
+
+.hero__copy { display: grid; gap: 20px; max-width: 620px; }
+.hero__title { color: var(--c-text); }
+.hero__accent { position: relative; color: var(--c-primary); white-space: nowrap; }
+.hero__accent::after {
+  content: ''; position: absolute; left: 0.04em; right: 0.12em; bottom: 0.02em; height: 0.09em; border-radius: 4px;
+  background: var(--brand-line); transform-origin: left; animation: underline 0.9s 0.6s var(--ease-out) both;
+}
+@keyframes underline { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hero__support { font-family: var(--font-display); font-weight: 600; font-size: clamp(20px, 1.9vw, 26px); line-height: 1.3; letter-spacing: -0.015em; color: var(--c-text); }
+.hero__body { max-width: 560px; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.hero__trust { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--c-text-3); padding-top: 16px; border-top: 1px solid var(--c-border); }
+
+/* First paint: short upward fade; still readable if CSS animations are disabled */
+.hero__in { animation: heroIn 0.7s var(--ease-out) both; animation-delay: var(--d, 0ms); }
+@keyframes heroIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.hero__strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); margin-top: var(--s-2xl); }
+.hero__cap {
+  display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 0 20px;
+  background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--r);
+  text-decoration: none; color: var(--c-text); position: relative; overflow: hidden;
+  transition: border-color var(--dur-2), transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2);
+}
+.hero__cap::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--tone); }
+.hero__cap--salesforce { --tone: var(--c-primary); }
+.hero__cap--mulesoft { --tone: var(--c-tertiary); }
+.hero__cap--mobile { --tone: var(--c-secondary); }
+.hero__cap:hover { border-color: var(--tone); transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.hero__cap-num { font-family: var(--font-display); font-weight: 700; font-size: 12px; color: var(--c-text-3); letter-spacing: 0.06em; }
+.hero__cap-name { font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+.hero__cap svg { margin-left: auto; color: var(--c-text-3); }
+
+@media (max-width: 1024px) {
+  .hero { padding-top: calc(var(--header-h) + 40px); }
+  .hero__inner { grid-template-columns: 1fr; gap: var(--s-xl); }
+  .hero__copy { max-width: 680px; }
+}
+@media (max-width: 639px) {
+  .hero__ctas { display: grid; }
+  .hero__strip { grid-template-columns: 1fr; gap: 8px; margin-top: var(--s-xl); }
+  .hero__cap { min-height: 56px; }
+}
